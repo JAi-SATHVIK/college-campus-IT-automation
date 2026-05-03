@@ -1,0 +1,17 @@
+[labservers]
+servera
+
+[webservers]
+serverb
+
+[dbservers]
+serverc
+
+[facultyservers]
+serverd
+
+[allservers:children]
+labservers
+webservers
+dbservers
+facultyservers

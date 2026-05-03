@@ -1,0 +1,25 @@
+college_name: "SRM University"
+web_title: "College Campus Automation Portal"
+
+student_users:
+  - student01
+  - student02
+  - student03
+  - student04
+  - student05
+
+faculty_users:
+  - faculty_cse
+  - faculty_ece
+  - faculty_mech
+
+common_packages:
+  - vim
+  - git
+  - wget
+  - net-tools
+  - firewalld
+  - python3
+
+db_name: campus_records
+db_user: campusadmin

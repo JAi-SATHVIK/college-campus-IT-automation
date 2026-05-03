@@ -1,0 +1,10 @@
+- name: College Campus IT Infrastructure Automation
+  hosts: allservers
+  vars_files:
+    - vault/secrets.yml
+  roles:
+    - common
+    - user_management
+    - web_portal
+    - database_records
+    - firewall_security

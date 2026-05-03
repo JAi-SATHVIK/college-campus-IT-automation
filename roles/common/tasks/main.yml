@@ -1,0 +1,12 @@
+- name: Install common packages on all servers
+  yum:
+    name: "{{ common_packages }}"
+    state: present
+  tags: packages
+
+- name: Enable firewalld
+  service:
+    name: firewalld
+    state: started
+    enabled: yes
+  tags: packages

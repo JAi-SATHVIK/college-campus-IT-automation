@@ -1,0 +1,25 @@
+- name: Allow SSH
+  ansible.posix.firewalld:
+    service: ssh
+    permanent: yes
+    state: enabled
+    immediate: yes
+  tags: firewall
+
+- name: Allow HTTP
+  ansible.posix.firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: inventory_hostname == "serverb"
+  tags: firewall
+
+- name: Allow MySQL
+  ansible.posix.firewalld:
+    port: 3306/tcp
+    permanent: yes
+    state: enabled
+    immediate: yes
+  when: inventory_hostname == "serverc"
+  tags: firewall

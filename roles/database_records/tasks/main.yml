@@ -1,0 +1,31 @@
+---
+- name: Install MariaDB server
+  yum:
+    name:
+      - mariadb-server
+      - python3-PyMySQL
+    state: present
+  when: inventory_hostname == "serverc"
+  tags: db
+
+- name: Start mariadb
+  service:
+    name: mariadb
+    state: started
+    enabled: yes
+  when: inventory_hostname == "serverc"
+  tags: db
+
+- name: Create campus database manually
+  shell: >
+    mysql -e "CREATE DATABASE IF NOT EXISTS {{ db_name }};"
+  when: inventory_hostname == "serverc"
+  tags: db
+
+- name: Create database user manually
+  shell: >
+    mysql -e "CREATE USER IF NOT EXISTS '{{ db_user }}'@'localhost' IDENTIFIED BY '{{ db_password }}';
+    GRANT ALL PRIVILEGES ON {{ db_name }}.* TO '{{ db_user }}'@'localhost';
+    FLUSH PRIVILEGES;"
+  when: inventory_hostname == "serverc"
+  tags: db

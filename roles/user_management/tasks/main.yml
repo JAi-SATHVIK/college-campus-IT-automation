@@ -1,0 +1,17 @@
+- name: Create student users in servera
+  user:
+    name: "{{ item }}"
+    password: "{{ student_default_pass | password_hash('sha512') }}"
+    state: present
+  loop: "{{ student_users }}"
+  when: inventory_hostname == "servera"
+  tags: students
+
+- name: Create faculty users in serverd
+  user:
+    name: "{{ item }}"
+    password: "{{ faculty_default_pass | password_hash('sha512') }}"
+    state: present
+  loop: "{{ faculty_users }}"
+  when: inventory_hostname == "serverd"
+  tags: faculty

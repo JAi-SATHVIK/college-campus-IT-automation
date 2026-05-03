@@ -1,0 +1,22 @@
+- name: Install Apache web server
+  yum:
+    name: httpd
+    state: present
+  when: inventory_hostname == "serverb"
+  tags: web
+
+- name: Deploy homepage template
+  template:
+    src: index.html.j2
+    dest: /var/www/html/index.html
+  when: inventory_hostname == "serverb"
+  notify: restart httpd
+  tags: web
+
+- name: Start Apache service
+  service:
+    name: httpd
+    state: started
+    enabled: yes
+  when: inventory_hostname == "serverb"
+  tags: web
